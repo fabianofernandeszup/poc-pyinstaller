@@ -1,0 +1,26 @@
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['windows-latest', 'ubuntu-latest, 'macos-latest']
+
+    steps:
+    - uses: actions/checkout@v2.3.4
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - run: pip install -r requirements.txt pyinstaller
+    - run: pyinstaller poc.py
+    # Optionally verify that it works (provided that it does not need user interaction)
+    - run: |
+        cd ./dist
+        ls
+    - uses: actions/upload-artifact@v2
+      with:
+        path: dist/*
