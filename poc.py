@@ -4,7 +4,7 @@ import html2text
 print("\033[31mSTART of execution\033[0m\n")
 
 print("\033[1m1 - Read Github TXT file\033[0m")
-url = "https://raw.githubusercontent.com/GuillaumeFalourd/poc-github-actions/main/report.txt"
+url = "https://raw.githubusercontent.com/Orangestack-com/Orangestack-com/main/orangestack.txt"
 req = requests.get(url)
 req = req.text
 print("\033[33mContent:\033[0m", req)
@@ -21,7 +21,7 @@ else:
     print(r.text)
 
 print("\n\033[1m3 - Read Github PAGES file\033[0m")
-url = "https://guillaumefalourd.github.io/"
+url = "https://Orangestack-com.github.io"
 req = requests.get(url)
 req = req.text
 print("\033[33mContent:\033[0m\n", html2text.html2text(req))
