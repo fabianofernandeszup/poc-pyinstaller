@@ -24,26 +24,26 @@ jobs:
       run: |
         cd ./dist/poc
         ls
-        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-          echo "Linux"
-          ./poc
-        elif [[ "$OSTYPE" == "darwin"* ]]; then
-          echo "MacOS"
-          ./poc
-        elif [[ "$OSTYPE" == "cygwin" ]]; then
-          echo "Cygwin"
-        elif [[ "$OSTYPE" == "msys" ]]; then
-          echo "Msys"
-          ./poc.exe
-        elif [[ "$OSTYPE" == "win32" ]]; then
-          echo "Win32"
-        elif [[ "$OSTYPE" == "freebsd"* ]]; then
-          echo "freebsd"
-        else
-          echo "Unknown OSTYPE:" $OSTYPE
-          echo ${{ matrix.os }}
-        fi
-      shell: bash
+      #   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+      #     echo "Linux"
+      #     ./poc
+      #   elif [[ "$OSTYPE" == "darwin"* ]]; then
+      #     echo "MacOS"
+      #     ./poc
+      #   elif [[ "$OSTYPE" == "cygwin" ]]; then
+      #     echo "Cygwin"
+      #   elif [[ "$OSTYPE" == "msys" ]]; then
+      #     echo "Msys"
+      #     ./poc.exe
+      #   elif [[ "$OSTYPE" == "win32" ]]; then
+      #     echo "Win32"
+      #   elif [[ "$OSTYPE" == "freebsd"* ]]; then
+      #     echo "freebsd"
+      #   else
+      #     echo "Unknown OSTYPE:" $OSTYPE
+      #     echo ${{ matrix.os }}
+      #   fi
+      # shell: bash
     - name: Extract Unix binary
       uses: actions/upload-artifact@v2
       if: ${{ matrix.os }} != 'windows-latest'
