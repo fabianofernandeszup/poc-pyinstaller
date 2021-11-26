@@ -19,10 +19,10 @@ jobs:
         python-version: 3.7
 
     - run: pip install -r requirements.txt pyinstaller
-    - run: pyinstaller poc.py
+    - run: pyinstaller poc.py --onefile --clean
     - name: Check OS and files
       run: |
-        cd ./dist/poc
+        cd ./dist
         ls
       #   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
       #     echo "Linux"
@@ -49,10 +49,10 @@ jobs:
       if: ${{ matrix.os }} != 'windows-latest'
       with:
         name: artifact-${{ matrix.os }}
-        path: dist/poc/poc
+        path: dist/poc
     - name: Extract Windows binary
       uses: actions/upload-artifact@v2
       if: ${{ matrix.os }} == 'windows-latest'
       with:
         name: artifact-${{ matrix.os }}
-        path: dist/poc/poc.exe
+        path: dist/poc.exe
