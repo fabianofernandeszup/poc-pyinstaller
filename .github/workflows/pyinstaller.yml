@@ -20,28 +20,39 @@ jobs:
 
     - run: pip install -r requirements.txt pyinstaller
     - run: pyinstaller poc.py
-    # Optionally verify that it works (provided that it does not need user interaction)
-    - run: |
+    - name: Check OS and files
+      run: |
         cd ./dist/poc
         ls
         if [[ "$OSTYPE" == "linux-gnu"* ]]; then
           echo "Linux"
+          ./poc
         elif [[ "$OSTYPE" == "darwin"* ]]; then
           echo "MacOS"
+          ./poc
         elif [[ "$OSTYPE" == "cygwin" ]]; then
           echo "Cygwin"
         elif [[ "$OSTYPE" == "msys" ]]; then
           echo "Msys"
+          ./poc.exe
         elif [[ "$OSTYPE" == "win32" ]]; then
           echo "Win32"
         elif [[ "$OSTYPE" == "freebsd"* ]]; then
           echo "freebsd"
         else
-          echo "OSTYPE:" $OSTYPE
+          echo "Unknown OSTYPE:" $OSTYPE
           echo ${{ matrix.os }}
         fi
       shell: bash
-    - uses: actions/upload-artifact@v2
+    - name: Extract Unix binary
+      uses: actions/upload-artifact@v2
+      if: ${{ matrix.os }} != 'windows-latest'
       with:
         name: artifact-${{ matrix.os }}
-        path: dist/*
+        path: dist/poc/poc
+    - name: Extract Windows binary
+      uses: actions/upload-artifact@v2
+      if: ${{ matrix.os }} == 'windows-latest'
+      with:
+        name: artifact-${{ matrix.os }}
+        path: dist/poc/poc.exe
