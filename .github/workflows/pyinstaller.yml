@@ -49,10 +49,10 @@ jobs:
       if: ${{ matrix.os }} != 'windows-latest'
       with:
         name: artifact-${{ matrix.os }}
-        path: dist/poc/poc
+        path: dist/poc
     - name: Extract Windows binary
       uses: actions/upload-artifact@v2
       if: ${{ matrix.os }} == 'windows-latest'
       with:
         name: artifact-${{ matrix.os }}
-        path: dist/poc/poc.exe
+        path: dist/poc.exe
