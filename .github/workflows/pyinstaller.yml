@@ -1,5 +1,8 @@
+name: PyInstaller
+
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,6 +24,23 @@ jobs:
     - run: |
         cd ./dist/poc
         ls
+        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+          echo "Linux"
+        elif [[ "$OSTYPE" == "darwin"* ]]; then
+          echo "MacOS"
+        elif [[ "$OSTYPE" == "cygwin" ]]; then
+          echo "Cygwin"
+        elif [[ "$OSTYPE" == "msys" ]]; then
+          echo "Msys"
+        elif [[ "$OSTYPE" == "win32" ]]; then
+          echo "Win32"
+        elif [[ "$OSTYPE" == "freebsd"* ]]; then
+          echo "freebsd"
+        else
+          echo "OSTYPE:" $OSTYPE
+          echo ${{ matrix.os }}
+        fi
+      shell: bash
     - uses: actions/upload-artifact@v2
       with:
         name: artifact-${{ matrix.os }}
