@@ -1,5 +1,7 @@
 # poc-pyinstaller
 
+[![PyInstaller](https://github.com/GuillaumeFalourd/poc-pyinstaller/actions/workflows/pyinstaller.yml/badge.svg)](https://github.com/GuillaumeFalourd/poc-pyinstaller/actions/workflows/pyinstaller.yml)
+
 POC using PyInstaller with Github Actions to generate binaries from a python script.
 
 
