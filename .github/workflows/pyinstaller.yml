@@ -11,45 +11,30 @@ jobs:
       fail-fast: false
       matrix:
         os: ['windows-latest', 'ubuntu-latest', 'macos-latest']
-
     steps:
+    
     - uses: actions/checkout@v2.3.4
+    
     - uses: actions/setup-python@v2
       with:
         python-version: 3.7
 
     - run: pip install -r requirements.txt pyinstaller
+    
     - run: pyinstaller poc.py --onefile --clean
-    - name: Check OS and files
+    
+    - name: Check files
       run: |
         cd ./dist
         ls
-      #   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-      #     echo "Linux"
-      #     ./poc
-      #   elif [[ "$OSTYPE" == "darwin"* ]]; then
-      #     echo "MacOS"
-      #     ./poc
-      #   elif [[ "$OSTYPE" == "cygwin" ]]; then
-      #     echo "Cygwin"
-      #   elif [[ "$OSTYPE" == "msys" ]]; then
-      #     echo "Msys"
-      #     ./poc.exe
-      #   elif [[ "$OSTYPE" == "win32" ]]; then
-      #     echo "Win32"
-      #   elif [[ "$OSTYPE" == "freebsd"* ]]; then
-      #     echo "freebsd"
-      #   else
-      #     echo "Unknown OSTYPE:" $OSTYPE
-      #     echo ${{ matrix.os }}
-      #   fi
-      # shell: bash
+    
     - name: Extract Unix binary
       uses: actions/upload-artifact@v2
       if: ${{ matrix.os }} != 'windows-latest'
       with:
         name: artifact-${{ matrix.os }}
         path: dist/poc
+    
     - name: Extract Windows binary
       uses: actions/upload-artifact@v2
       if: ${{ matrix.os }} == 'windows-latest'
