@@ -1,6 +1,6 @@
 # poc-pyinstaller
 
-POS using PyInstaller with Github Actions to generate binaries from a python script.
+POC using PyInstaller with Github Actions to generate binaries from a python script.
 
 
 ## Demo
